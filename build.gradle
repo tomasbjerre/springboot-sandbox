@@ -10,7 +10,7 @@ buildscript {
 	}
 }
 
-subprojects {
+allprojects {
 	apply from: project.buildscript.classLoader.getResource('main.gradle').toURI()
 	apply plugin: 'java'
 }

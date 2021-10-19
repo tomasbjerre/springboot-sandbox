@@ -3,6 +3,7 @@ package se.bjurr.springboot.application;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import se.bjurr.springboot.application.api.ResolvedPropsDTO;
 import se.bjurr.springboot.properties.annotations.ExampleProperty;
 
 @RestController
@@ -14,11 +15,7 @@ public class ExampleController {
   private List<String> myStringListProperty;
 
   @GetMapping("/ping")
-  public String ping() {
-    return "myStringProperty: "
-        + this.myStringProperty
-        + "\n"
-        + "myStringListProperty: "
-        + this.myStringListProperty;
+  public ResolvedPropsDTO ping() {
+    return new ResolvedPropsDTO(this.myStringProperty, this.myStringListProperty);
   }
 }

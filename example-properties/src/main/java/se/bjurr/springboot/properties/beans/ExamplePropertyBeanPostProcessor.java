@@ -30,7 +30,7 @@ public class ExamplePropertyBeanPostProcessor implements BeanPostProcessor {
       }
       ReflectionUtils.makeAccessible(declaredField);
       try {
-        final String value = this.env.resolvePlaceholders(annotation.value());
+        final String value = this.env.getProperty(annotation.value());
         if (declaredField.getType() == String.class) {
           declaredField.set(bean, value);
         } else if (declaredField.getType() == List.class) {
