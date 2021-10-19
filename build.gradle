@@ -1,0 +1,40 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		mavenLocal()
+	}
+	dependencies {
+		classpath 'se.bjurr.gradle:gradle-scripts:2.+'
+		classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.5.5'
+		classpath 'io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE'
+	}
+}
+
+subprojects {
+	apply from: project.buildscript.classLoader.getResource('main.gradle').toURI()
+	apply plugin: 'java'
+}
+
+project('example-properties') {
+	dependencies {
+		implementation 'org.springframework:spring-context:5.3.10'
+
+		testImplementation 'junit:junit:4.12'
+		testImplementation 'org.assertj:assertj-core:2.3.0'
+	}
+}
+
+project('example-application') {
+	apply plugin: "io.spring.dependency-management"
+	apply plugin: "org.springframework.boot"
+
+	dependencies {
+		implementation project(':example-properties')
+		implementation 'org.springframework.boot:spring-boot-starter-web'
+
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation 'junit:junit:4.12'
+		testImplementation 'org.assertj:assertj-core:2.3.0'
+	}
+}
+

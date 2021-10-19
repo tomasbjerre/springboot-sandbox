@@ -1,0 +1,4 @@
+rootProject.name = 'example-base'
+
+include 'example-application',
+        'example-properties'
